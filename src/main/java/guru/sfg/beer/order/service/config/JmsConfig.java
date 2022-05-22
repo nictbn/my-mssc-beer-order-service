@@ -12,6 +12,8 @@ public class JmsConfig {
     public static final String VALIDATE_ORDER_QUEUE = "validate-queue";
     public static final String VALIDATE_ORDER_RESPONSE_QUEUE = "validate-order-response";
 
+    public static final String ALLOCATE_ORDER_QUEUE = "allocate-queue";
+
     @Bean
     public MessageConverter jacksonJmsMessageConverter() {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
