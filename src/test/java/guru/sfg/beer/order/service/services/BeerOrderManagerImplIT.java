@@ -1,4 +1,4 @@
-package guru.sfg.beer.order.service;
+package guru.sfg.beer.order.service.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -90,19 +90,11 @@ public class BeerOrderManagerImplIT {
             assertEquals(BeerOrderStatusEnum.ALLOCATED, foundOrder.getOrderStatus());
         });
 
-        await().untilAsserted(() -> {
-            BeerOrder foundOrder = beerOrderRepository.findById(beerOrder.getId()).get();
-            BeerOrderLine line = foundOrder.getBeerOrderLines().iterator().next();
-            assertEquals(line.getOrderQuantity(), line.getQuantityAllocated());
-        });
-
         BeerOrder savedBeerOrder2 = beerOrderRepository.findById(savedBeerOrder.getId()).get();
 
-        assertNotNull(savedBeerOrder2);
+        assertNotNull(savedBeerOrder);
         assertEquals(BeerOrderStatusEnum.ALLOCATED, savedBeerOrder2.getOrderStatus());
-        savedBeerOrder2.getBeerOrderLines().forEach(line -> {
-            assertEquals(line.getOrderQuantity(), line.getQuantityAllocated());
-        });
+
     }
 
     public BeerOrder createBeerOrder(){
